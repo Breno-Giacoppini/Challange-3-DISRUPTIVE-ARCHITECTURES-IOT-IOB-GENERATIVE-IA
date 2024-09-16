@@ -1,55 +1,64 @@
 # Sistema de Previsão de Estoque de Roupas com IA
 
 ## Descrição do Projeto
-
-Este projeto implementa um sistema de previsão de vendas de roupas baseado em Inteligência Artificial (IA). O objetivo é ajudar o usuário a tomar decisões mais informadas sobre o reabastecimento de estoque com base em dados históricos de vendas e previsões automáticas.
+Este projeto implementa um sistema de previsão de vendas de roupas baseado em Inteligência Artificial (IA), com o objetivo de auxiliar na tomada de decisões sobre o reabastecimento de estoque, a partir de dados históricos e previsões automáticas.
 
 ## Arquitetura de IA
 
-### 1. Coleta e Entrada de Dados
-- **Coleta Manual e Importação de CSV**: O sistema oferece flexibilidade para coletar dados de vendas, seja através da inserção manual (onde o usuário escolhe o modelo, tamanho e quantidade vendida) ou pela importação de um arquivo CSV.
-- **Relação Temporal dos Dados**: As vendas são registradas ao longo de diferentes períodos (ex.: meses), e esses dados temporais são essenciais para o modelo de previsão de demanda.
+1. **Coleta e Entrada de Dados**
+   - **Coleta Manual e Importação de CSV**: Permite inserir dados manualmente (modelo, tamanho e quantidade vendida) ou importá-los por meio de arquivos CSV.
+   - **Relação Temporal dos Dados**: As vendas são registradas ao longo de períodos específicos (ex.: meses), fundamentais para o modelo de previsão de demanda.
 
-**Objetivo**: Alimentar o modelo de IA com dados suficientes para que ele consiga aprender padrões de vendas ao longo do tempo.
+2. **Pré-processamento dos Dados**
+   - **Pandas para Manipulação de Dados**: A biblioteca Pandas estrutura os dados de vendas, contendo informações como modelo, tamanho e unidades vendidas em diferentes períodos.
+   - **Codificação Categórica**: Utilizamos OneHotEncoder para transformar dados categóricos em representações numéricas compreensíveis pelo modelo de aprendizado.
 
-### 2. Pré-processamento dos Dados
-- **Pandas para Manipulação de Dados**: A biblioteca Pandas é usada para estruturar e organizar os dados de vendas. Cada entrada contém informações sobre o modelo de roupa, tamanho e o número de unidades vendidas em períodos específicos.
-- **Codificação Categórica com OneHotEncoder**: Para utilizar os dados categóricos (modelos, tamanhos e períodos) em algoritmos de aprendizado de máquina, esses dados precisam ser transformados em uma representação numérica. A ferramenta OneHotEncoder converte essas categorias em variáveis binárias (0 ou 1), o que permite que o modelo de regressão os compreenda.
+3. **Modelo de Aprendizado de Máquina**
+   - **Algoritmo: RandomForestRegressor**: Esse algoritmo de regressão é utilizado para prever variáveis contínuas, como a quantidade de unidades a serem reabastecidas.
+   - **Divisão dos Dados**: Os dados são divididos em 80% para treino e 20% para teste, garantindo a validação das previsões.
 
-**Objetivo**: Preparar os dados para o treinamento do modelo, eliminando ruídos e tornando-os utilizáveis para a máquina.
+4. **Predição**
+   - **Entrada de Novos Períodos**: Após o treinamento do modelo, o sistema prevê vendas para períodos subsequentes, agrupando previsões por "modelo" e "tamanho" de roupa.
 
-### 3. Modelo de Aprendizado de Máquina
-- **Algoritmo Escolhido: RandomForestRegressor**: O modelo de aprendizado de máquina escolhido é o RandomForestRegressor, uma técnica de regressão baseada em árvores de decisão. Ele cria múltiplas árvores de decisão e combina seus resultados para fazer previsões mais precisas. Essa abordagem é robusta e eficaz para prever variáveis contínuas, como o número de unidades a serem compradas para o estoque.
-- **Divisão dos Dados: Treino e Teste**: O conjunto de dados é dividido em duas partes: 80% para o treino e 20% para o teste, a fim de verificar a precisão das previsões.
+5. **Arquitetura Tecnológica**
+   - **Linguagem Python**: Escolhida por sua robustez na manipulação de dados e aprendizado de máquina.
+   - **Bibliotecas**: Utilizadas Pandas, NumPy, Scikit-learn, e o algoritmo RandomForestRegressor para predições.
 
-**Objetivo**: Utilizar o modelo para capturar padrões nos dados históricos e prever vendas futuras com base nesses padrões.
+6. **Benefícios e Eficiência**
+   - **Escalabilidade**: O sistema pode ser facilmente escalado, permitindo a adição de novos dados e modelos sem grandes modificações.
+   - **Precisão nas Previsões**: Gera previsões precisas, mesmo com variáveis categóricas, como modelos e tamanhos.
 
-### 4. Predição
-- **Entrada de Novos Períodos**: Após o treinamento do modelo, ele é utilizado para prever as vendas de um próximo período (por exemplo, o mês seguinte). O sistema identifica o último período informado e gera previsões para o subsequente.
-- **Agrupamento por Modelo e Tamanho**: As previsões são feitas para cada combinação de "modelo de roupa" e "tamanho", permitindo maior granularidade na análise de estoque.
+7. **Próximos Passos**
+   - **Refinamento do Modelo**: O modelo será ajustado à medida que novos dados forem adicionados, aprimorando as previsões.
+   - **Integração com Interfaces Web**: Utilizando frameworks como Flask ou Django, o projeto será disponibilizado em plataformas web, tornando a interação mais acessível.
+   - **Análise de Sentimentos**: A inclusão de dados de redes sociais permitirá prever tendências de mercado e preferências dos consumidores, refinando ainda mais as previsões.
 
-**Objetivo**: Auxiliar o usuário a decidir quais peças e tamanhos devem ser priorizados no reabastecimento do estoque, com base em previsões automáticas.
+## Integração com Outras Disciplinas
 
-### 5. Arquitetura Tecnológica Subjacente
-- **Linguagem Python**: O Python foi escolhido devido à sua vasta utilização em ciência de dados e aprendizado de máquina, bem como pela grande disponibilidade de bibliotecas adequadas.
-- **Bibliotecas Usadas**:
-  - **Pandas e NumPy**: Para manipulação e análise de dados.
-  - **Scikit-learn**: Para o pré-processamento, treino e teste do modelo de aprendizado de máquina.
-  - **RandomForestRegressor**: O modelo que treina e faz as previsões de quantidades futuras de vendas.
+1. **Qualidade e Teste de Software**
+   - **Backlogs e Sprint Planning**: As previsões de produtos com maior demanda tornam a criação de backlogs e o planejamento de sprints mais eficientes, priorizando funcionalidades essenciais.
+   - **Automação de Testes**: A IA sugere cenários para testes automatizados com base nas previsões, como o aumento de vendas de determinado produto.
 
-**Objetivo**: Garantir que a arquitetura possa lidar com dados reais e complexos, mantendo uma interface simples e intuitiva para o usuário.
+2. **Java (API e Interface Gráfica)**
+   - **Análise de Dados em Tempo Real**: Previsões de vendas podem ser exibidas em tempo real usando Thymeleaf e APIs, garantindo informações sempre atualizadas.
+   - **Previsões Inteligentes**: Aplicações Java podem consumir diretamente os dados preditivos do código em Python, auxiliando nas decisões de reabastecimento e promoções.
 
-### 6. Benefícios e Eficiência do Sistema
-- **Escalabilidade**: A arquitetura é facilmente escalável, permitindo a adição de novos dados e modelos de roupas sem grandes modificações.
-- **Eficiência Preditiva**: O uso de Random Forest proporciona previsões precisas, mesmo com várias variáveis categóricas, como diferentes modelos e tamanhos de roupas.
-- **Customização e Automação**: O usuário tem controle sobre os dados inseridos, e o sistema sugere automaticamente previsões de vendas futuras.
+3. **Mobile (Aplicativos e Navegabilidade)**
+   - **Interface Inteligente**: O sistema envia notificações automáticas para reabastecimento, com base nas previsões de vendas.
+   - **Navegação Personalizada**: A IA sugere ações no app, como promoções ou ajustes no estoque, conforme as previsões de vendas.
 
-### 7. Próximos Passos na Implementação
-- **Refinamento do Modelo**: À medida que mais dados forem adicionados e as variáveis de entrada ajustadas, o modelo poderá ser melhorado, resultando em previsões ainda mais precisas.
-- **Integração com Interfaces Web**: Com frameworks como Flask ou Django, o projeto poderá ser transferido para uma plataforma web, permitindo uma interação mais visual e acessível.
-- **Aprimoramento da Análise de Sentimentos**: A incorporação de dados de redes sociais e a análise de sentimentos poderão refinar ainda mais as previsões, considerando tendências de mercado e preferências dos consumidores.
+4. **Banco de Dados (Procedures e Trigger de Auditoria)**
+   - **Otimização de Procedures**: Consultas otimizadas para grandes volumes de dados de vendas.
+   - **Relatórios Dinâmicos**: Relatórios preditivos são gerados, permitindo análise detalhada das previsões.
+   - **Trigger de Auditoria**: Triggers auditam previsões e comparam com os dados reais, monitorando a consistência.
 
-## Conclusão
-A arquitetura de IA desenvolvida utiliza técnicas avançadas de aprendizado de máquina para coletar, organizar e analisar dados históricos de vendas, prevendo a demanda futura de roupas específicas. A integração com bibliotecas poderosas como Pandas e Scikit-learn oferece uma base sólida para o crescimento do projeto, com potencial de melhorias contínuas à medida que mais dados são incorporados e novos recursos são implementados.
+5. **DevOps (Automatização e Infraestrutura em Nuvem)**
+   - **Automação de Pipelines**: O sistema de previsão pode ser integrado a pipelines de CI/CD, automatizando previsões e processos de reabastecimento.
+   - **Escalabilidade em Nuvem**: A infraestrutura de nuvem permite que o sistema escale conforme novos dados são inseridos, ajustando automaticamente as previsões.
 
----
+6. **C# (Desenvolvimento de Aplicações e Otimização de Código)**
+   - **Lógica de Negócios Dinâmica**: A previsão de vendas permite que a lógica de negócios seja ajustada em tempo real, melhorando a alocação de recursos e o gerenciamento de estoque.
+   - **Automatização de Processos**: A integração com APIs e sistemas de gerenciamento de estoque desenvolvidos em C# automatiza processos e otimiza respostas à demanda do mercado.
+
+## Conclusão Geral
+A solução de previsão de estoque com IA não apenas otimiza a gestão de estoques e decisões de reabastecimento, mas também se integra com disciplinas como Qualidade de Software, Java, Mobile, Banco de Dados e DevOps. Isso transforma o projeto em uma ferramenta poderosa para melhorar a eficiência operacional e a experiência do usuário, garantindo decisões mais assertivas.
